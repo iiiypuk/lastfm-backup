@@ -4,11 +4,8 @@ import json
 import urllib.request
 
 __author__ = 'Alexander Popov'
-__version__ = (0, 1, 0,)
+__version__ = '0.1.1'
 __license__ = 'Unlicense'
-
-with open('./config.json') as f:
-    CONFIG = json.loads(f.read())
 
 
 def get_pages(username, api_key):
@@ -20,19 +17,28 @@ def get_pages(username, api_key):
 
     return(pages)
 
+
+def get_scrobbles(username, api_key, page):
+    response = json.loads(
+               urllib.request.urlopen(
+                'http://ws.audioscrobbler.com/2.0/'
+                '?method=user.getrecenttracks&user=%s'
+                '&api_key=%s&page=%d&format=json' %
+                (username, api_key, page,))
+               .read().decode("utf8"))['recenttracks']['track']
+
+    return(response)
+
 if __name__ == '__main__':
+    with open('./config.json') as f:
+        CONFIG = json.loads(f.read())
+
     PAGES = get_pages(CONFIG['username'], CONFIG['api_key'])
     COUNT = 1
     TRACKS = []
     while COUNT <= PAGES:
         print('\r%d%%' % (COUNT * 100 / PAGES), end='')
-        response = json.loads(
-               urllib.request.urlopen(
-                'http://ws.audioscrobbler.com/2.0/'
-                '?method=user.getrecenttracks&user=%s'
-                '&api_key=%s&page=%d&format=json' %
-                (CONFIG['username'], CONFIG['api_key'], COUNT,))
-               .read().decode("utf8"))['recenttracks']['track']
+        response = get_scrobbles(CONFIG['username'], CONFIG['api_key'], COUNT)
 
         for track in response:
             TRACKS.append({'artist': track['artist']['#text'],
