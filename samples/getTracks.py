@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import lastfm_import as lfm
+import lastfm_backup as lfm
 
 API_KEY = '0e5070361556658180f9b1518b341eda'
 USERNAME = 'goodgame'
