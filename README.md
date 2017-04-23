@@ -1,19 +1,22 @@
-![Version](https://img.shields.io/pypi/v/lastfm_backup.svg?style=flat-square)
-![License](https://img.shields.io/pypi/l/lastfm_backup.svg.svg?style=flat-square)
-![PyVersion](https://img.shields.io/pypi/pyversions/lastfm_backup.svg.svg?style=flat-square)
+![Version](https://img.shields.io/pypi/v/lastfm-backup.svg?style=flat-square)
+![License](https://img.shields.io/pypi/l/lastfm-backup.svg.svg?style=flat-square)
+![PyVersion](https://img.shields.io/pypi/pyversions/lastfm-backup.svg.svg?style=flat-square)
 
-**How to use as standartalone app**  
-1. Rename `config.json.example` to `config.json` and edit.  
-2. Run this `python lastfm_backup.py` or `~/lastfm_backup.py`.  
-3. PROFIT!! 
+**How to use:**
+--------------
+* [Get](http://www.last.fm/api/account/create) API Key.
+* Stop scrobbling!
+* Rename `config.json.example` to `config.json` and edit.
+* Run script `lastfm_backup.py`.
+* WAIT!!
 
-**How to use as library**  
-see [getTracks.py](https://github.com/iiiypuk/lastfm-backup/blob/master/samples/getTracks.py).  
+My `>72,2k` tracks scrobbles sized `~9.9M`.  
+Tar.xz sized `5.4K`.
 
-My `>57,5k` tracks scrobbles sized `~8.2Mb`.  
-
-**TODO**  
-`-` web service  
-`-` more output types (sqlite, csv)  
-`-` confirugurabled output  
-`-` continue backup
+**TODO:**
+--------
+- [ ] web service
+- [ ] more output types (sqlite, csv)
+- [ ] confirugurabled output
+- [ ] continue backup
+- [ ] multithread
