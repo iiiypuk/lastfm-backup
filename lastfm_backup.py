@@ -23,7 +23,7 @@ def get_scrobbles(username, api_key, page):
     response = json.loads(urllib.request.urlopen(
                'http://ws.audioscrobbler.com/2.0/'
                '?method=user.getrecenttracks&user={0}&api_key={1}&format=json'
-               '&limit=200'.format(username, api_key)
+               '&limit=200&page={2}'.format(username, api_key, page)
                ).read().decode("utf8"))['recenttracks']['track']
 
     return(response)
