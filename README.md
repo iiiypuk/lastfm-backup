@@ -12,7 +12,7 @@
 
 **TODO:**
 --------
-- [ ] web service
+- [+] web service [lfmbak](https://github.com/iiiypuk/lfmbak)
 - [ ] more output types (sqlite, csv)
 - [ ] confirugurabled output
 - [ ] continue backup
