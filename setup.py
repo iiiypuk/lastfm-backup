@@ -1,8 +1,8 @@
-from distutils.core import setup
+import setuptools
 
 import lastfm_backup
 
-setup(
+setuptools.setup(
     name='lastfm-backup',
     version=lastfm_backup.__version__,
     description='Last.fm scrobbles backup',
@@ -16,8 +16,6 @@ setup(
     keywords=['last.fm', 'lastfm', 'backup'],
     classifiers=['License :: Public Domain',
                  'Programming Language :: Python :: 3',
-                 'Programming Language :: Python :: 3.2',
-                 'Programming Language :: Python :: 3.3',
-                 'Programming Language :: Python :: 3.4',
-                 'Programming Language :: Python :: 3.5'],
+                 'Operating System :: OS Independent'],
+    python_requires='>=3.0'
 )

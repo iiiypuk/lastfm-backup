@@ -5,7 +5,7 @@ import urllib.request
 import os.path
 
 __author__ = 'Alexander Popov'
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 __license__ = 'Unlicense'
 
 
@@ -42,7 +42,7 @@ if __name__ == '__main__':
     curPage = 1
     tracks = []
     while curPage <= PAGES:
-        print('\r%d%%' % (curPage * 100 / PAGES), end='')
+        print('\r{0}% [{1} of {2}]'.format((curPage * 100 / PAGES), curPage, PAGES), end='')
         response = get_scrobbles(CFG['username'], CFG['api_key'], curPage)
 
         for track in response:
@@ -57,5 +57,5 @@ if __name__ == '__main__':
         f.write(
             json.dumps(tracks, indent=4, sort_keys=True, ensure_ascii=False))
 
-    print('\r{0} tracks saved in {1}.json!'.format(
+    print('\n{0} tracks saved in {1}.json!'.format(
           len(tracks), CFG['username'],))
