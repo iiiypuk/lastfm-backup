@@ -5,7 +5,7 @@ import lastfm_backup
 setuptools.setup(
     name='lastfm-backup',
     version=lastfm_backup.__version__,
-    description='Last.fm scrobbles backup',
+    description='Last.fm scrobbling backup',
     author=lastfm_backup.__author__,
     author_email='iiiypuk@fastmail.fm',
     url='https://github.com/iiiypuk/lastfm-backup',

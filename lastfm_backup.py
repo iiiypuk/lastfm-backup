@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
 import json
-import requests
+import csv
 import os.path
+import requests
 
 __author__ = 'Alexander Popov'
 __version__ = '2.0.0'
@@ -53,6 +54,46 @@ def get_now_scrobbling(username, api_key):
         return(False)
 
 
+def scrobbling_export(tracks, username, export_format='is as'):
+    """ Save scrobbled track via various format """
+
+    if export_format == 'is as':
+        with open('%s.json' % (username), 'w', encoding='utf-8') as f:
+            data = json.dumps(tracks, indent=4,
+                              sort_keys=True, ensure_ascii=False)
+            f.write(data)
+
+    elif export_format == 'simple':
+        _ = {}
+
+        for track in tracks:
+            _.append([
+                track['artist']['#text'], track['name'], track['date']['uts']
+                ])
+
+        with open('%s.json' % (username), 'w', encoding='utf-8') as f:
+            data = json.dumps(_, indent=4,
+                              sort_keys=True, ensure_ascii=False)
+            f.write(data)
+
+    elif export_format == 'cvs':
+        _ = []
+
+        for track in tracks:
+            _.append([
+                track['artist']['#text'],
+                track['name'],
+                int(track['date']['uts'])
+                ])
+
+        with open('%s.csv' % (username), 'w', encoding='utf-8') as f:
+            data = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC, delimiter=',')
+            for row in _:
+                data.writerow(row)
+
+    return(1)
+
+
 if __name__ == '__main__':
     _ = dict()
 
@@ -64,7 +105,7 @@ if __name__ == '__main__':
         _['username'] = input('Username: ')
     api_key, username = _['api_key'], _['username']
 
-    total_pages = get_pages(username, api_key) - 603
+    total_pages = get_pages(username, api_key)
     current_page = 1
     scrobbled = []
 
@@ -80,10 +121,9 @@ if __name__ == '__main__':
 
         current_page += 1
 
-    with open('%s.json' % (username), 'w+', encoding='utf-8') as f:
-        data = json.dumps(scrobbled, indent=4,
-                          sort_keys=True, ensure_ascii=False)
-        f.write(data)
+    # if get_now_scrobbling(username, api_key):
+    #     scrobbled.pop(0)
 
-    print('\n{0} tracks saved in {1}.json!'.format(
-        len(scrobbled), username))
+    if scrobbling_export(scrobbled, username, _['export_format']):
+        print('\n{0} tracks saved!'.format(
+            len(scrobbled), username))

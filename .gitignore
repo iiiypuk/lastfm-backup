@@ -1,5 +1,6 @@
 env
 *.json
+*.csv
 *.pyc
 build/
 dist/

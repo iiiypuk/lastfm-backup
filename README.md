@@ -1,17 +1,19 @@
-![Version](https://img.shields.io/pypi/v/lastfm-backup.svg?style=flat-square)
-![License](https://img.shields.io/pypi/l/lastfm-backup.svg?style=flat-square)
-![PyVersion](https://img.shields.io/pypi/pyversions/lastfm-backup.svg?style=flat-square)
+![Version](https://img.shields.io/pypi/v/lastfm-backup.svg?style=for-the-badge)
+![License](https://img.shields.io/pypi/l/lastfm-backup.svg?style=for-the-badge)
+![PyVersion](https://img.shields.io/pypi/pyversions/lastfm-backup.svg?style=for-the-badge)
 
-**How to use:**
---------------
-* [Get](http://www.last.fm/api/account/create) API Key.
+### Features:
+* simple
+* three formats for export data
+
+### How to use:
 * Stop scrobbling!
-* Rename `config.json.example` to `config.json` and edit.
-* Run script `lastfm_backup.py`.
+* [Get](http://www.last.fm/api/account/create) API Key.
+* Modify `config.json`.
+* Run `lastfm_backup.py`.
 * WAIT =)
 
-**TODO:**
---------
+### TODO:
 - [ ] web service [see lfmbak](https://github.com/iiiypuk/lfmbak)
 - [ ] more output types (sqlite, csv)
 - [ ] confirugurabled output
