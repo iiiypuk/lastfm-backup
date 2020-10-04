@@ -6,7 +6,7 @@ import os.path
 import requests
 
 __author__ = 'Alexander Popov'
-__version__ = '2.0.0'
+__version__ = '2.0.1'
 __license__ = 'Unlicense'
 
 
@@ -64,7 +64,7 @@ def scrobbling_export(tracks, username, export_format='is as'):
             f.write(data)
 
     elif export_format == 'simple':
-        _ = {}
+        _ = []
 
         for track in tracks:
             _.append([
@@ -76,7 +76,7 @@ def scrobbling_export(tracks, username, export_format='is as'):
                               sort_keys=True, ensure_ascii=False)
             f.write(data)
 
-    elif export_format == 'cvs':
+    elif export_format == 'csv':
         _ = []
 
         for track in tracks:
@@ -86,7 +86,7 @@ def scrobbling_export(tracks, username, export_format='is as'):
                 int(track['date']['uts'])
                 ])
 
-        with open('%s.csv' % (username), 'w', encoding='utf-8') as f:
+        with open('%s.csv' % (username), 'w', encoding='utf-8', newline='') as f:
             data = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC, delimiter=',')
             for row in _:
                 data.writerow(row)
