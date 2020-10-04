@@ -6,7 +6,7 @@ import os.path
 import requests
 
 __author__ = 'Alexander Popov'
-__version__ = '2.0.1'
+__version__ = '2.1.0'
 __license__ = 'Unlicense'
 
 
@@ -67,9 +67,10 @@ def scrobbling_export(tracks, username, export_format='is as'):
         _ = []
 
         for track in tracks:
-            _.append([
-                track['artist']['#text'], track['name'], track['date']['uts']
-                ])
+            _.append({'artist': track['artist']['#text'],
+                      'name': track['name'],
+                      'album': track['album']['#text'],
+                      'date': track['date']['uts']})
 
         with open('%s.json' % (username), 'w', encoding='utf-8') as f:
             data = json.dumps(_, indent=4,
@@ -78,6 +79,11 @@ def scrobbling_export(tracks, username, export_format='is as'):
 
     elif export_format == 'csv':
         _ = []
+        _.append([
+            'artist',
+            'track',
+            'date'
+        ])
 
         for track in tracks:
             _.append([
