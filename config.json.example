@@ -1,5 +1,5 @@
 {
   "username" : "",
   "api_key" : "",
-  "export_format": "is as, simple, csv"
+  "export_format": "dump, simple, csv"
 }

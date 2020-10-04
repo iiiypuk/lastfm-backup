@@ -54,10 +54,10 @@ def get_now_scrobbling(username, api_key):
         return(False)
 
 
-def scrobbling_export(tracks, username, export_format='is as'):
+def scrobbling_export(tracks, username, export_format='dump'):
     """ Save scrobbled track via various format """
 
-    if export_format == 'is as':
+    if export_format == 'dump':
         with open('%s.json' % (username), 'w', encoding='utf-8') as f:
             data = json.dumps(tracks, indent=4,
                               sort_keys=True, ensure_ascii=False)
@@ -67,35 +67,33 @@ def scrobbling_export(tracks, username, export_format='is as'):
         _ = []
 
         for track in tracks:
-            _.append({'artist': track['artist']['#text'],
-                      'name': track['name'],
-                      'album': track['album']['#text'],
-                      'date': track['date']['uts']})
+            _.append({
+                'artist': track['artist']['#text'],
+                'name': track['name'],
+                'album': track['album']['#text'],
+                'date': int(track['date']['uts'])
+                })
 
         with open('%s.json' % (username), 'w', encoding='utf-8') as f:
-            data = json.dumps(_, indent=4,
-                              sort_keys=True, ensure_ascii=False)
+            data = json.dumps(_, indent=4, sort_keys=True, ensure_ascii=False)
             f.write(data)
 
     elif export_format == 'csv':
         _ = []
-        _.append([
-            'artist',
-            'track',
-            'date'
-        ])
 
         for track in tracks:
             _.append([
                 track['artist']['#text'],
                 track['name'],
+                track['album']['#text'],
                 int(track['date']['uts'])
                 ])
 
-        with open('%s.csv' % (username), 'w', encoding='utf-8', newline='') as f:
+        with open('%s.csv' % (username), 'w', encoding='utf-8',
+                  newline='') as f:
             data = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC, delimiter=',')
-            for row in _:
-                data.writerow(row)
+            data.writerow(['artist', 'track', 'album', 'date'])
+            data.writerows(_)
 
     return(1)
 
